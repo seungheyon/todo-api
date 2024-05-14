@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate
 import java.util.Date
 
 @Entity
+@Table(name="todo-api")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
