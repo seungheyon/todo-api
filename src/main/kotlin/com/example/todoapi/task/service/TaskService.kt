@@ -39,7 +39,7 @@ class TaskService(
     }
 
     fun getTasks(): TasksResponseDto {
-        return TasksResponseDto(taskRepository.findAll())
+        return TasksResponseDto(taskRepository.findAllByOrderByCreatedAtDesc())
     }
 
     @Transactional
