@@ -1,6 +1,6 @@
 package com.example.todoapi.task.dto
 
-import com.example.todoapi.task.entity.Task
+import com.example.todoapi.common.dto.GeneralResponseDto
 import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
@@ -13,12 +13,5 @@ class TaskResponseDto(
     var taskTitle : String,
     var taskDetail : String,
     var username : String
-) {
-
-    fun TaskResponseDto(task : Task){
-        this.id = task.id
-        this.taskTitle = task.taskTitle
-        this.taskDetail = task.taskDetails
-        this.username = task.userName
-    }
+    ) : GeneralResponseDto {
 }

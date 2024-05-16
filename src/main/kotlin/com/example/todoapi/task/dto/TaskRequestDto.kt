@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-class TaskRequestDto(
+data class TaskRequestDto(
     var taskTitle : String,
     var taskDetails : String,
     var userName : String
