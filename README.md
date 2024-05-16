@@ -34,9 +34,13 @@ Todo-list api
 -------------
 
 * ERD
+
   ![image](https://github.com/seungheyon/todo-api/assets/71931476/b807e71a-71e2-44ab-8d7a-d7fbd0ce4736)
-  -> 추가 요구사항을 모두 반영하여 작성한 ERD 입니다.
+  
+-> 추가 요구사항을 모두 반영하여 작성한 ERD 입니다.
 
 * Api 명세
+
   https://www.notion.so/09546f63d69f455c8c598fdd9bb8da79?v=4fd946163e5b40a79dc2ff9ae12ed97a&pvs=4
-  -> 아직 고민이 필요한 부분은 공란으로 두었습니다.
+  
+-> 아직 고민이 필요한 부분은 공란으로 두었습니다.
