@@ -39,7 +39,7 @@ Todo-list api
   
 -> 추가 요구사항을 모두 반영하여 작성한 ERD 입니다.
 
-* Api 명세
+* Api 명세(Notion 링크)
 
   https://www.notion.so/09546f63d69f455c8c598fdd9bb8da79?v=4fd946163e5b40a79dc2ff9ae12ed97a&pvs=4
   
