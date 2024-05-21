@@ -25,7 +25,8 @@ class TaskService(
             savedTask.id,
             savedTask.taskTitle,
             savedTask.taskDetails,
-            savedTask.userName
+            savedTask.userName,
+            savedTask.isCompleted
         )
     }
 
@@ -35,7 +36,8 @@ class TaskService(
             task.id,
             task.taskTitle,
             task.taskDetails,
-            task.userName
+            task.userName,
+            task.isCompleted
         )
     }
 
@@ -51,12 +53,19 @@ class TaskService(
             task.id,
             task.taskTitle,
             task.taskDetails,
-            task.userName
+            task.userName,
+            task.isCompleted
         )
     }
 
     fun deleteTask(taskId: Long) {
         taskRepository.deleteById(taskId)
+    }
+
+    @Transactional
+    fun completeTask(taskId: Long) {
+        val task = taskRepository.findById(taskId).orElseThrow()
+        task.setCompleteTrue()
     }
 
 }

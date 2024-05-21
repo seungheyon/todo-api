@@ -28,9 +28,16 @@ class Task(
     @Column(name = "id", nullable = false)
     var id: Long? = null
 
+    var isCompleted : Boolean = false
+
     fun updateTask(taskRequestDto: TaskRequestDto){
         this.taskTitle = taskRequestDto.taskTitle
         this.taskDetails = taskRequestDto.taskDetails
         this.userName = taskRequestDto.userName
     }
+
+    fun setCompleteTrue(){
+        this.isCompleted = true
+    }
+
 }

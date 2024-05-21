@@ -11,6 +11,7 @@ class TaskResponseDto(
     var id : Long?,
     var taskTitle : String,
     var taskDetail : String,
-    var username : String
+    var username : String,
+    var isCompleted : Boolean
     ) {
 }

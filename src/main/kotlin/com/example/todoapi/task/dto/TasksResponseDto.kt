@@ -10,7 +10,8 @@ class TasksResponseDto(
             id = it.id,
             taskTitle = it.taskTitle,
             taskDetail = it.taskDetails,
-            username = it.userName
+            username = it.userName,
+            isCompleted = it.isCompleted
         )
     }
 }
