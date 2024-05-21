@@ -1,5 +1,6 @@
 package com.example.todoapi.task.service
 
+import com.example.todoapi.exception.ModelNotFoundException
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
 import com.example.todoapi.task.dto.TasksResponseDto

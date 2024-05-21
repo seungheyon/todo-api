@@ -11,12 +11,13 @@ import org.hibernate.annotations.CreationTimestamp
 import org.springframework.data.annotation.CreatedDate
 import java.util.Date
 
-@Entity
+
 @Table(name="todo-api")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 class Task(
     var taskTitle : String,
     var taskDetails : String,

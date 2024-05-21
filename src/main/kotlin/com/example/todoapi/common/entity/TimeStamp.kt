@@ -24,3 +24,8 @@ open class TimeStamp {
     @Column(name = "modified_at", nullable = false)
     var modifiedAt: Date? = null
 }
+
+
+
+
+
