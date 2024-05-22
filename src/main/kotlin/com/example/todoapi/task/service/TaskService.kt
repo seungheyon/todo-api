@@ -1,6 +1,6 @@
 package com.example.todoapi.task.service
 
-import com.example.todoapi.exception.ModelNotFoundException
+import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
 import com.example.todoapi.task.dto.TasksResponseDto
@@ -30,14 +30,16 @@ class TaskService(
         )
     }
 
-    fun getTask(taskId: Long): TaskResponseDto {
+    fun getTask(taskId: Long): TaskDetailResponseDto {
         val task = taskRepository.findById(taskId).orElseThrow()
-        return TaskResponseDto(
+        val comments = task.comments.map{it.toResponseDto()}
+        return TaskDetailResponseDto(
             task.id,
             task.taskTitle,
             task.taskDetails,
             task.userName,
-            task.isCompleted
+            task.isCompleted,
+            comments
         )
     }
 

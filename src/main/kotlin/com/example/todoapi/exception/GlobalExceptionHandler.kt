@@ -15,4 +15,9 @@ class GlobalExceptionHandler {
             .body(ErrorResponseDto(e.message))
     }
 
+    @ExceptionHandler(UserNotAuthorizedException :: class)
+    fun userNotAuthorizedExceptionHandler(e : UserNotAuthorizedException) : ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponseDto(e.message))
+    }
 }

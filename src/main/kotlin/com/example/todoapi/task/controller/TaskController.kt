@@ -1,6 +1,7 @@
 package com.example.todoapi.task.controller
 
 import com.example.todoapi.common.dto.StatusResponseDto
+import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
 import com.example.todoapi.task.dto.TasksResponseDto
@@ -13,49 +14,49 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/tasks")
 @RestController
 class TaskController(
-    val taskService : TaskService
+    val taskService: TaskService
 ) {
 
     @PostMapping("")
     fun createTask(
         @RequestBody taskRequestDto: TaskRequestDto
-    ) : ResponseEntity<TaskResponseDto> {
+    ): ResponseEntity<TaskResponseDto> {
         val taskResponseDto = taskService.createTask(taskRequestDto)
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.CREATED)
             .body(taskResponseDto)
     }
 
     @GetMapping("/{taskId}")
-    fun getTask(@PathVariable taskId : Long) : ResponseEntity<TaskResponseDto> {
+    fun getTask(@PathVariable taskId: Long): ResponseEntity<TaskDetailResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
             .body(taskService.getTask(taskId))
     }
 
     @GetMapping("")
-    fun getTasks() : ResponseEntity<TasksResponseDto> {
+    fun getTasks(): ResponseEntity<TasksResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
             .body(taskService.getTasks())
     }
 
     @PutMapping("{taskId}")
     fun updateTask(
-        @PathVariable taskId : Long,
-        @RequestBody taskRequestDto : TaskRequestDto
-    ) : ResponseEntity<TaskResponseDto> {
+        @PathVariable taskId: Long,
+        @RequestBody taskRequestDto: TaskRequestDto
+    ): ResponseEntity<TaskResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
             .body(taskService.updateTask(taskId, taskRequestDto))
     }
 
     @DeleteMapping("/{taskId}")
-    fun deleteTask(@PathVariable taskId : Long) : ResponseEntity<StatusResponseDto> {
+    fun deleteTask(@PathVariable taskId: Long): ResponseEntity<StatusResponseDto> {
         taskService.deleteTask(taskId)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+        return ResponseEntity.status(HttpStatus.OK)
             .body(StatusResponseDto("할 일이 삭제되었습니다."))
     }
 
     @PostMapping("/{taskId}")
-    fun completeTask(@PathVariable taskId: Long) : ResponseEntity<StatusResponseDto>{
+    fun completeTask(@PathVariable taskId: Long): ResponseEntity<StatusResponseDto> {
         taskService.completeTask(taskId)
         return ResponseEntity.status(HttpStatus.OK)
             .body(StatusResponseDto("할 일이 완료처리 되었습니다."))
