@@ -21,9 +21,8 @@ class TaskController(
         @RequestBody taskRequestDto: TaskRequestDto
     ) : ResponseEntity<TaskResponseDto> {
         val taskResponseDto = taskService.createTask(taskRequestDto)
-        val headers = HttpHeaders()
-        headers.add(HttpHeaders.ACCEPT,"headerValue")
-        return ResponseEntity.status(HttpStatus.CREATED)
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(taskResponseDto)
     }
 
