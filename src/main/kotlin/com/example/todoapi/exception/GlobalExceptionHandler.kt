@@ -20,4 +20,16 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponseDto(e.message))
     }
+
+    @ExceptionHandler(TaskTitleLengthException :: class)
+    fun taskTitleLengthExceptionHandler(e : TaskTitleLengthException) : ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponseDto(e.message))
+    }
+
+    @ExceptionHandler(TaskContentsLengthException :: class)
+    fun taskContentsLengthExceptionHandler(e : TaskContentsLengthException) : ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponseDto(e.message))
+    }
 }
