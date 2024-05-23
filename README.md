@@ -36,9 +36,11 @@ Todo-list api
 
 * ERD
 
-  ![image](https://github.com/seungheyon/todo-api/assets/71931476/b807e71a-71e2-44ab-8d7a-d7fbd0ce4736)
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/b16e6f10-e19d-4b6a-9903-450f22f3781f)
+
+
   
--> 추가 요구사항을 모두 반영하여 작성한 ERD 입니다.
+-> 구현 기능까지 반영된 ERD 입니다.
 
 * Api 명세(Notion 링크)
 
