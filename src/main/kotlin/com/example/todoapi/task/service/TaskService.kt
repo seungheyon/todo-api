@@ -30,6 +30,7 @@ class TaskService(
         )
     }
 
+    @Transactional(readOnly = true)
     fun getTask(taskId: Long): TaskDetailResponseDto {
         val task = taskRepository.findById(taskId).orElseThrow()
         val comments = task.comments.map{it.toResponseDto()}
@@ -43,8 +44,11 @@ class TaskService(
         )
     }
 
-    fun getTasks(): TasksResponseDto {
-        return TasksResponseDto(taskRepository.findAllByOrderByCreatedAtDesc())
+    fun getTasks(authorName: String?): TasksResponseDto {
+        if(authorName==null){
+            return TasksResponseDto(taskRepository.findAllByOrderByCreatedAtDesc())
+        }
+        return TasksResponseDto((taskRepository.findAllByUserNameOrderByCreatedAtDesc(authorName)))
     }
 
     @Transactional

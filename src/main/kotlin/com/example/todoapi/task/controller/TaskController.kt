@@ -34,9 +34,11 @@ class TaskController(
     }
 
     @GetMapping("")
-    fun getTasks(): ResponseEntity<TasksResponseDto> {
+    fun getTasks(
+        @RequestParam authorName: String?
+    ): ResponseEntity<TasksResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
-            .body(taskService.getTasks())
+            .body(taskService.getTasks(authorName))
     }
 
     @PutMapping("{taskId}")
