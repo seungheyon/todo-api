@@ -24,9 +24,9 @@ class CommentController(
 ) {
 
     @PostMapping("")
-    fun createComment(@RequestBody commentRequestDto: CommentCreateRequestDto)
+    fun createComment(@PathVariable taskId: Long, @RequestBody commentRequestDto: CommentCreateRequestDto)
             : ResponseEntity<CommentResponseDto> {
-        val commentResponseDto: CommentResponseDto = commentService.createComment(commentRequestDto)
+        val commentResponseDto: CommentResponseDto = commentService.createComment(taskId, commentRequestDto)
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(commentResponseDto)
     }
@@ -45,10 +45,9 @@ class CommentController(
     @DeleteMapping("/{commentId}")
     fun deleteComment(
         @PathVariable commentId: Long,
-        @PathVariable taskId: Long,
         @RequestBody commentDeleteRequestDto: CommentDeleteRequestDto
     ): ResponseEntity<StatusResponseDto> {
-        commentService.deleteComment(commentId, taskId, commentDeleteRequestDto)
+        commentService.deleteComment(commentId, commentDeleteRequestDto)
         return ResponseEntity.status(HttpStatus.OK)
             .body(StatusResponseDto("댓글이 삭제되었습니다."))
     }

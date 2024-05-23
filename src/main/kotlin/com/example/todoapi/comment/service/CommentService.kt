@@ -16,8 +16,8 @@ class CommentService(
     val commentRepository: CommentRepository,
     val taskRepository: TaskRepository
 ) {
-    fun createComment(commentRequestDto: CommentCreateRequestDto): CommentResponseDto {
-        val task = taskRepository.findById(commentRequestDto.taskId).orElseThrow()
+    fun createComment(taskId: Long, commentRequestDto: CommentCreateRequestDto): CommentResponseDto {
+        val task = taskRepository.findById(taskId).orElseThrow()
         val comment = Comment(
             commentDetails = commentRequestDto.commentDetails,
             userName = commentRequestDto.userName,
@@ -43,8 +43,14 @@ class CommentService(
         )
     }
 
-    fun deleteComment(commentId: Long, taskId: Long, commentDeleteRequestDto: CommentDeleteRequestDto) {
-        commentRepository.deleteById(commentId)
+    fun deleteComment(commentId: Long, commentDeleteRequestDto: CommentDeleteRequestDto) {
+        val comment = commentRepository.findById(commentId).orElseThrow()
+        if(comment.validateCommentAuthor(commentDeleteRequestDto.userName, commentDeleteRequestDto.password)){
+            commentRepository.delete(comment)
+            return
+        }
+        else throw UserNotAuthorizedException(commentDeleteRequestDto.userName, commentDeleteRequestDto.password)
+
     }
 
 }

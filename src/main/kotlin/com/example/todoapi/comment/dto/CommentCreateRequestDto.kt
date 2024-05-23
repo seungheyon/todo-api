@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor
 data class CommentCreateRequestDto(
     val commentDetails : String,
     val password : String,
-    val userName : String,
-    val taskId : Long
+    val userName : String
 )

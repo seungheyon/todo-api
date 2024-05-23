@@ -31,7 +31,7 @@ class Task(
 
     var isCompleted: Boolean = false
 
-    @OneToMany(mappedBy = "task",cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task",cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var comments: MutableList<Comment> = mutableListOf()
 
     fun updateTask(taskRequestDto: TaskRequestDto) {
