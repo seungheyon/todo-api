@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RequestMapping("/comments")
+@RequestMapping("/task/{taskId}/comments")
 @RestController
 class CommentController(
     val commentService: CommentService
@@ -45,9 +45,10 @@ class CommentController(
     @DeleteMapping("/{commentId}")
     fun deleteComment(
         @PathVariable commentId: Long,
+        @PathVariable taskId: Long,
         @RequestBody commentDeleteRequestDto: CommentDeleteRequestDto
     ): ResponseEntity<StatusResponseDto> {
-        commentService.deleteComment(commentId, commentDeleteRequestDto)
+        commentService.deleteComment(commentId, taskId, commentDeleteRequestDto)
         return ResponseEntity.status(HttpStatus.OK)
             .body(StatusResponseDto("댓글이 삭제되었습니다."))
     }

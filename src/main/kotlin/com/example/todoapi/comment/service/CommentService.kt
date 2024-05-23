@@ -43,16 +43,8 @@ class CommentService(
         )
     }
 
-    fun deleteComment(commentId: Long, commentDeleteRequestDto: CommentDeleteRequestDto) {
+    fun deleteComment(commentId: Long, taskId: Long, commentDeleteRequestDto: CommentDeleteRequestDto) {
         commentRepository.deleteById(commentId)
-//        val comment = commentRepository.findById(commentId).orElseThrow()
-//        if(comment.validateCommentAuthor(commentDeleteRequestDto.userName, commentDeleteRequestDto.password)){
-//            commentRepository.deleteById(commentId)
-//            return
-//        }
-//        else {
-//            throw UserNotAuthorizedException(commentDeleteRequestDto.userName, commentDeleteRequestDto.password)
-//        }
     }
 
 }
