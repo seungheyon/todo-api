@@ -51,7 +51,7 @@ Todo-list api
 
 ### 구현한 기능
 
-  - 할 일(Task) 엔티티와 댓글(Comment) 엔티티는 양방향 연관관계를 맺고 있습니다.
+  ###### 할 일(Task) 엔티티와 댓글(Comment) 엔티티는 양방향 연관관계를 맺고 있습니다.
 
 * 할 일(task) 작성 api
 
@@ -73,7 +73,7 @@ Todo-list api
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/a6fefce3-92b3-41e2-859c-e19cd88334aa)
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/a661efc4-7ee2-4104-b8dc-54ecde3881c8)
 
-  - 모든 수정 기능은 Dirty checking 사용하여 구현하였습니다.
+  ###### 모든 수정 기능은 Dirty checking 사용하여 구현하였습니다.
 
 * 할 일 삭제 api
 
