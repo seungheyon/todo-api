@@ -62,7 +62,7 @@ Todo-list api
 
 * 할 일 목록 조회 api
 
-![image](https://github.com/seungheyon/todo-api/assets/71931476/66727c11-993d-4b5f-a1a8-4644e30e0538)
+![image](https://github.com/seungheyon/todo-api/assets/71931476/5bd11066-e47f-4166-a1f4-fdd3a90b0cb8)
 
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/bcf0c5b1-710f-40cf-b31b-c954cc504115)
 
