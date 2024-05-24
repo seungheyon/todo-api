@@ -51,6 +51,15 @@ Todo-list api
 
 ### 구현한 기능
 * 할 일(task) 작성 api
+  @PostMapping("")
+    fun createTask(
+        @RequestBody taskRequestDto: TaskRequestDto
+    ): ResponseEntity<TaskResponseDto> {
+        val taskResponseDto = taskService.createTask(taskRequestDto)
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(taskResponseDto)
+    }
 * 할 일 조회 api
 * 할 일 목록 조회 api
 * 할 일 수정 api
