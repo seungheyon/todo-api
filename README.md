@@ -46,7 +46,7 @@ Todo-list api
 
   https://www.notion.so/09546f63d69f455c8c598fdd9bb8da79?v=4fd946163e5b40a79dc2ff9ae12ed97a&pvs=4
   
--> 아직 고민이 필요한 부분은 공란으로 두었습니다.
+
 
 
 ### 구현한 기능
@@ -59,6 +59,7 @@ Todo-list api
 * 댓글 작성 api
 * 댓글 수정 api
 * 댓글 삭제 api
+* 할 일 조회 시 연관된 댓글 조회
 * 할 일 목록 조회 api 에 작성자 이름으로 필터링 기능 추가
 * 할 일 작성, 수정 api 에 글자 수 검증 기능 추가
   
