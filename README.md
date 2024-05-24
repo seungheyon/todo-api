@@ -50,6 +50,9 @@ Todo-list api
 
 
 ### 구현한 기능
+
+- 할 일(Task) 엔티티와 댓글(Comment) 엔티티는 양방향 연관관계를 맺고 있습니다.
+
 * 할 일(task) 작성 api
 
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/dfc30bad-3fdb-4cb0-b7f3-74bffe9ede88)
@@ -69,6 +72,8 @@ Todo-list api
 
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/a6fefce3-92b3-41e2-859c-e19cd88334aa)
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/a661efc4-7ee2-4104-b8dc-54ecde3881c8)
+
+- 모든 수정 기능은 Dirty checking 사용하여 구현하였습니다.
 
 * 할 일 삭제 api
 
@@ -105,9 +110,12 @@ Todo-list api
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/5bd11066-e47f-4166-a1f4-fdd3a90b0cb8)
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/bcf0c5b1-710f-40cf-b31b-c954cc504115)
 
+- 할 일 목록 조회 api 안에 작성자 이름을 파라미터로 받고 Service 레이어의 메서드 내에서 분기하여 필터링 수행하였습니다.
+- 이루 동적 쿼리를 사용하는 방법으로 개선시킬 계획입니다.
+
 * 할 일 작성, 수정 api 에 글자 수 검증 기능 추가
 
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/624325ed-8cb8-44ca-b787-a50ea09ff935)
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/24226d5f-16a5-4f7f-a2fb-852626e79e47)
 
-
+- 도메인 엔티티 내에서 검증 로직을 가지고, 엔티티의 프로퍼티를 변경하는 행위와 그에 대한 검증도 엔티티에 종속되도록 설계했습니다.
