@@ -57,13 +57,12 @@ Todo-list api
 
 * 할 일 조회 api
 
-![image](https://github.com/seungheyon/todo-api/assets/71931476/baddf914-f6fb-462d-b4f6-9a8bc4e3d4d2)
+![image](https://github.com/seungheyon/todo-api/assets/71931476/42551779-e025-4c41-8fd7-6fc6da45614c)
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/c44fdce1-be10-482b-b32b-5dac22c11b0e)
 
 * 할 일 목록 조회 api
 
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/5bd11066-e47f-4166-a1f4-fdd3a90b0cb8)
-
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/bcf0c5b1-710f-40cf-b31b-c954cc504115)
 
 * 할 일 수정 api
