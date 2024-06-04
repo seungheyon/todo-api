@@ -1,5 +1,6 @@
 package com.example.todoapi.task.service
 
+import com.example.todoapi.common.constants.SortEnum
 import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
@@ -44,12 +45,15 @@ class TaskService(
         )
     }
 
+
     fun getTasks(authorName: String?): TasksResponseDto {
         if(authorName==null){
             return TasksResponseDto(taskRepository.findAllByOrderByCreatedAtDesc())
         }
         return TasksResponseDto((taskRepository.findAllByUserNameOrderByCreatedAtDesc(authorName)))
     }
+
+
 
     @Transactional
     fun updateTask(taskId : Long, taskRequestDto: TaskRequestDto) : TaskResponseDto{
