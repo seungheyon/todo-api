@@ -1,10 +1,8 @@
-package com.example.todoapi.social.naver.controller
+package com.example.todoapi.social.oauth2.controller
 
+import com.example.todoapi.social.oauth2.service.Oauth2LoginService
 import jakarta.servlet.http.HttpServletRequest
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod
-import org.springframework.http.MediaType
+import org.springframework.http.*
 import org.springframework.ui.Model
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
@@ -20,24 +18,36 @@ import java.security.SecureRandom
 
 @RestController
 @RequestMapping("/oauth2")
-class LoginController() {
+class Oauth2LoginController(
+    private val oauth2LoginService: Oauth2LoginService
+) {
 
     val NAVER_CLIENT_ID = "TLjpwgasybwAyOjCzRIM"
 
     @GetMapping("/naver/login")
     fun naverLogin(request : HttpServletRequest, model : Model) : RedirectView {
-
-
-        val REDIRECT_URI = "http://localhost:8080/oauth2/naver/callback"
-
         val state = generateState()
-
-        val session = request.session
-        session.setAttribute("state", state)
-
+        request.session.setAttribute("state", state)
+        val REDIRECT_URI = "http://localhost:8080/oauth2/callback"
         val naverAuthUrl = "https://nid.naver.com/oauth2.0/authorize?client_id=" + NAVER_CLIENT_ID + "&response_type=code" + "&redirect_uri=" + REDIRECT_URI + "&state=" + state;
-
         return RedirectView(naverAuthUrl)
+    }
+
+    @GetMapping("/callback")
+    fun callBack(
+        @RequestParam("code") code : String,
+        @RequestParam("state") state : String,
+        request: HttpServletRequest, model: Model
+    ): Map<*, *>? {
+        //Session 의 state 정보와 Redirect 요청의 state 정보가 일치하는지 확인
+        val session = request.session
+        val sessionState = session.getAttribute("state")
+
+        if (sessionState == null || !sessionState.equals(state)) {
+            throw IllegalStateException("Invalid state token");
+        }
+        //Login Service 호출
+        return oauth2LoginService.oauthLogin(code, sessionState)
     }
 
     @GetMapping("/naver/callback")
@@ -58,8 +68,6 @@ class LoginController() {
 
         return accessToken
     }
-
-
 
 
     fun generateState() : String {
