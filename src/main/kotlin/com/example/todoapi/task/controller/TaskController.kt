@@ -1,13 +1,11 @@
 package com.example.todoapi.task.controller
 
-import com.example.todoapi.common.constants.SortEnum
 import com.example.todoapi.common.dto.StatusResponseDto
 import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
 import com.example.todoapi.task.dto.TasksResponseDto
 import com.example.todoapi.task.service.TaskService
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,16 +18,19 @@ class TaskController(
 
     @PostMapping("")
     fun createTask(
-        @RequestBody taskRequestDto: TaskRequestDto
+        @RequestBody taskRequestDto: TaskRequestDto,
+        @RequestHeader("Authorization") accessToken: String
     ): ResponseEntity<TaskResponseDto> {
-        val taskResponseDto = taskService.createTask(taskRequestDto)
+        val taskResponseDto = taskService.createTask(accessToken, taskRequestDto)
 
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(taskResponseDto)
     }
 
     @GetMapping("/{taskId}")
-    fun getTask(@PathVariable taskId: Long): ResponseEntity<TaskDetailResponseDto> {
+    fun getTask(
+        @PathVariable taskId: Long
+    ): ResponseEntity<TaskDetailResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
             .body(taskService.getTask(taskId))
     }
@@ -46,10 +47,11 @@ class TaskController(
     @PutMapping("{taskId}")
     fun updateTask(
         @PathVariable taskId: Long,
-        @RequestBody taskRequestDto: TaskRequestDto
+        @RequestBody taskRequestDto: TaskRequestDto,
+        @RequestHeader("Authorization") accessToken: String
     ): ResponseEntity<TaskResponseDto> {
         return ResponseEntity.status(HttpStatus.OK)
-            .body(taskService.updateTask(taskId, taskRequestDto))
+            .body(taskService.updateTask(accessToken, taskId, taskRequestDto))
     }
 
     @DeleteMapping("/{taskId}")

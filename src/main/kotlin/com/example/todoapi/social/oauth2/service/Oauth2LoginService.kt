@@ -31,7 +31,7 @@ class Oauth2LoginService(
         }
         // 4. Access 토큰 발행 -> JWT Util 사용, 토큰 반환
         val userId = naverSocialUsersRepository.findById(userInfo.response.id).orElseThrow().users.id!!
-        userId.let { return jwtUtil.generateAccessToken(userInfo.response.name, it) }
+        userId.let { return jwtUtil.generateAccessToken(it) }
     }
 
 }

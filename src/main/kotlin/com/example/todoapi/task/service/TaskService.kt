@@ -1,21 +1,25 @@
 package com.example.todoapi.task.service
 
-import com.example.todoapi.common.constants.SortEnum
+import com.example.todoapi.security.jwt.JwtUtil
 import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
 import com.example.todoapi.task.dto.TasksResponseDto
 import com.example.todoapi.task.entity.Task
 import com.example.todoapi.task.repository.TaskRepository
+import com.example.todoapi.users.repository.UsersRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TaskService(
-    val taskRepository: TaskRepository
+    val taskRepository: TaskRepository,
+    val usersRepository: UsersRepository,
+    val jwtUtil: JwtUtil
 ) {
 
-    fun createTask(taskRequestDto: TaskRequestDto): TaskResponseDto {
+    fun createTask(accessToken: String, taskRequestDto: TaskRequestDto): TaskResponseDto {
+        jwtUtil.validateToken(accessToken).onFailure { throw IllegalArgumentException() }
         val task = Task(
             taskRequestDto.taskTitle,
             taskRequestDto.taskDetails,
@@ -56,8 +60,14 @@ class TaskService(
 
 
     @Transactional
-    fun updateTask(taskId : Long, taskRequestDto: TaskRequestDto) : TaskResponseDto{
+    fun updateTask(accessToken: String, taskId: Long, taskRequestDto: TaskRequestDto) : TaskResponseDto{
         val task = taskRepository.findById(taskId).orElseThrow()
+        jwtUtil.validateToken(accessToken).onSuccess {
+            if(usersRepository.findById(it.payload.subject.toLong()).orElseThrow().name!=task.userName){
+                throw IllegalArgumentException()
+            }
+        }.onFailure { throw IllegalArgumentException() }
+
         task.updateTask(taskRequestDto)
         return TaskResponseDto(
             task.id,
