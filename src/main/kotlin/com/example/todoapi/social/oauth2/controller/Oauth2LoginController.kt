@@ -1,5 +1,6 @@
 package com.example.todoapi.social.oauth2.controller
 
+import com.example.todoapi.social.oauth2.dto.LoginResponseDto
 import com.example.todoapi.social.oauth2.service.Oauth2LoginService
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.*
@@ -38,7 +39,7 @@ class Oauth2LoginController(
         @RequestParam("code") code : String,
         @RequestParam("state") state : String,
         request: HttpServletRequest, model: Model
-    ): Map<*, *>? {
+    ): ResponseEntity<LoginResponseDto> {
         //Session 의 state 정보와 Redirect 요청의 state 정보가 일치하는지 확인
         val session = request.session
         val sessionState = session.getAttribute("state")
@@ -47,7 +48,8 @@ class Oauth2LoginController(
             throw IllegalStateException("Invalid state token");
         }
         //Login Service 호출
-        return oauth2LoginService.oauthLogin(code, sessionState)
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(LoginResponseDto(oauth2LoginService.oauthLogin(code, sessionState)))
     }
 
     @GetMapping("/naver/callback")

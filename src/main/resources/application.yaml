@@ -12,3 +12,9 @@ spring:
     show_sql: true
     hibernate:
       ddl-auto: create-drop
+
+auth:
+  jwt:
+    issuer: todoapi
+    secret: WYHOtSNvaWD8Zkm9wfVGrj+jzS6VHo3fALye8VOP6ivEIXcvoL4s9yRMG5dzyDTUqRS7v2ioLcVnbcox/2upqQ==
+    jwtTokenExpirationHour: 24
