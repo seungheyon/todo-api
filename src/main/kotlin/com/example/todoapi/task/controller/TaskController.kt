@@ -1,6 +1,7 @@
 package com.example.todoapi.task.controller
 
 import com.example.todoapi.common.dto.StatusResponseDto
+import com.example.todoapi.security.jwt.JwtUtil
 import com.example.todoapi.task.dto.TaskDetailResponseDto
 import com.example.todoapi.task.dto.TaskRequestDto
 import com.example.todoapi.task.dto.TaskResponseDto
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/tasks")
 @RestController
 class TaskController(
-    val taskService: TaskService
+    val taskService: TaskService,
+    val jwtUtil: JwtUtil
 ) {
 
     @PostMapping("")
@@ -21,8 +23,8 @@ class TaskController(
         @RequestBody taskRequestDto: TaskRequestDto,
         @RequestHeader("Authorization") accessToken: String
     ): ResponseEntity<TaskResponseDto> {
-        val taskResponseDto = taskService.createTask(accessToken, taskRequestDto)
-
+        jwtUtil.validateToken(accessToken).onFailure { throw IllegalArgumentException("잘못된 토큰입니다.") }
+        val taskResponseDto = taskService.createTask(taskRequestDto)
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(taskResponseDto)
     }

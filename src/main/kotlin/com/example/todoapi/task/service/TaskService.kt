@@ -18,8 +18,7 @@ class TaskService(
     val jwtUtil: JwtUtil
 ) {
 
-    fun createTask(accessToken: String, taskRequestDto: TaskRequestDto): TaskResponseDto {
-        jwtUtil.validateToken(accessToken).onFailure { throw IllegalArgumentException() }
+    fun createTask(taskRequestDto: TaskRequestDto): TaskResponseDto {
         val task = Task(
             taskRequestDto.taskTitle,
             taskRequestDto.taskDetails,
