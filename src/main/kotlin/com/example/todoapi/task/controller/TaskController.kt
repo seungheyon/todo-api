@@ -2,10 +2,7 @@ package com.example.todoapi.task.controller
 
 import com.example.todoapi.common.dto.StatusResponseDto
 import com.example.todoapi.security.jwt.JwtUtil
-import com.example.todoapi.task.dto.TaskDetailResponseDto
-import com.example.todoapi.task.dto.TaskRequestDto
-import com.example.todoapi.task.dto.TaskResponseDto
-import com.example.todoapi.task.dto.TasksResponseDto
+import com.example.todoapi.task.dto.*
 import com.example.todoapi.task.service.TaskService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -38,12 +35,20 @@ class TaskController(
     }
 
 
+//    @GetMapping("")
+//    fun getTasks(
+//        @RequestParam authorName: String?
+//    ): ResponseEntity<TasksResponseDto> {
+//        return ResponseEntity.status(HttpStatus.OK)
+//            .body(taskService.getTasks(authorName))
+//    }
+
     @GetMapping("")
-    fun getTasks(
-        @RequestParam authorName: String?
-    ): ResponseEntity<TasksResponseDto> {
+    fun searchTasks(
+        @ModelAttribute searchCondition: SearchCondition
+    ): ResponseEntity<TasksResponseDto>{
         return ResponseEntity.status(HttpStatus.OK)
-            .body(taskService.getTasks(authorName))
+            .body(taskService.searchTasks(searchCondition))
     }
 
     @PutMapping("{taskId}")

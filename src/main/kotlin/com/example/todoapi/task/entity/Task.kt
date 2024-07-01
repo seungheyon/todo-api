@@ -5,6 +5,7 @@ import com.example.todoapi.common.entity.TimeStamp
 import com.example.todoapi.exception.TaskContentsLengthException
 import com.example.todoapi.exception.TaskTitleLengthException
 import com.example.todoapi.task.constants.ContentsLengthPolicy
+import com.example.todoapi.task.constants.TaskCategory
 import com.example.todoapi.task.constants.TitleLengthPolicy
 import com.example.todoapi.task.dto.TaskRequestDto
 import jakarta.persistence.*
@@ -27,6 +28,7 @@ class Task(
     var taskTitle: String,
     var taskDetails: String,
     var userName: String,
+    val category: TaskCategory
 ) : TimeStamp() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +37,7 @@ class Task(
 
     var isCompleted: Boolean = false
 
-    @OneToMany(mappedBy = "task", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
     var comments: MutableList<Comment> = mutableListOf()
 
     init {

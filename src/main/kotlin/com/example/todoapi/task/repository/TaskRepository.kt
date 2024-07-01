@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TaskRepository : JpaRepository<Task, Long> {
+interface TaskRepository : JpaRepository<Task, Long>, TaskQueryDslRepository {
     fun findAllByOrderByCreatedAtDesc(): List<Task>
     fun findAllByUserNameOrderByCreatedAtDesc(authorName: String) : List<Task>
 }

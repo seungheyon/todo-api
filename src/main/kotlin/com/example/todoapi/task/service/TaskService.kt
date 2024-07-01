@@ -1,10 +1,8 @@
 package com.example.todoapi.task.service
 
 import com.example.todoapi.security.jwt.JwtUtil
-import com.example.todoapi.task.dto.TaskDetailResponseDto
-import com.example.todoapi.task.dto.TaskRequestDto
-import com.example.todoapi.task.dto.TaskResponseDto
-import com.example.todoapi.task.dto.TasksResponseDto
+import com.example.todoapi.task.constants.TaskCategory
+import com.example.todoapi.task.dto.*
 import com.example.todoapi.task.entity.Task
 import com.example.todoapi.task.repository.TaskRepository
 import com.example.todoapi.users.repository.UsersRepository
@@ -22,7 +20,8 @@ class TaskService(
         val task = Task(
             taskRequestDto.taskTitle,
             taskRequestDto.taskDetails,
-            taskRequestDto.userName
+            taskRequestDto.userName,
+            TaskCategory.fromString(taskRequestDto.category)
         )
         val savedTask: Task = taskRepository.save(task)
         return TaskResponseDto(
@@ -56,7 +55,9 @@ class TaskService(
         return TasksResponseDto((taskRepository.findAllByUserNameOrderByCreatedAtDesc(authorName)))
     }
 
-
+    fun searchTasks(searchCondition: SearchCondition): TasksResponseDto{
+        return TasksResponseDto(taskRepository.search(searchCondition))
+    }
 
     @Transactional
     fun updateTask(accessToken: String, taskId: Long, taskRequestDto: TaskRequestDto) : TaskResponseDto{
