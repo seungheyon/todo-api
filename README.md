@@ -128,29 +128,23 @@ Todo-list api
 
 ### QeuryDsl 사용하여 동적 조건으로 검색하는 기능 구현
 *  QueryDslConfig 클래스에서 JPAQueryFactory 빈 등록
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/09737689-15ed-4bc9-81ce-ec744d601dd8)
 
-@Configuration
-class QueryDslConfig {
-    @PersistenceContext
-    private lateinit var entityManager: EntityManager
-
-    @Bean
-    fun jpaQueryFactory(): JPAQueryFactory {
-        return JPAQueryFactory(entityManager)
-    }
-}
 
 * TaskQueyrDslRepository 를 작성하여, TaskRepository 가 이를 확장하도록 구현
-@Repository
-interface TaskRepository : JpaRepository<Task, Long>, TaskQueryDslRepository {
-    fun findAllByOrderByCreatedAtDesc(): List<Task>
-    fun findAllByUserNameOrderByCreatedAtDesc(authorName: String) : List<Task>
-}
-
-interface TaskQueryDslRepository {
-    fun search(searchCondition: SearchCondition): List<Task>
-}
-
-* 구현클래스에서 BooleanExpression 을 활용하여 동적 조건을 처리하도록 구현
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/075b533d-ca00-488b-abb7-6d7c7cc0e24e)
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/a537489c-4cef-4954-a85f-dc46a0577559)
 
   
+* 구현클래스에서 BooleanExpression 을 활용하여 동적 조건을 처리하도록 구현
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/f075877f-7aaf-4163-b482-c842d09c08cb)
+
+  
+### Service 레이어에 테스트 코드 작성(진행 중)
+* DataSource로 H2 를 연결하여 테스트 환경 구성
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/e775eb09-6444-4308-a006-3f71b7f9a3aa)
+
+* TaskService 클래스의 메서드 테스트 작성(진행 중)
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/0c781f8f-8ca0-4e6b-82b9-b38697b5c47f)
+
+
