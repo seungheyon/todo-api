@@ -128,8 +128,7 @@ Todo-list api
 
 ### QeuryDsl 사용하여 동적 조건으로 검색하는 기능 구현
 *  QueryDslConfig 클래스에서 JPAQueryFactory 빈 등록
-  ![image](https://github.com/seungheyon/todo-api/assets/71931476/09737689-15ed-4bc9-81ce-ec744d601dd8)
-
+  ![image](https://github.com/seungheyon/todo-api/assets/71931476/3e429356-ce59-44a5-a8da-cc5676d67983)
 
 * TaskQueyrDslRepository 를 작성하여, TaskRepository 가 이를 확장하도록 구현
   ![image](https://github.com/seungheyon/todo-api/assets/71931476/075b533d-ca00-488b-abb7-6d7c7cc0e24e)
