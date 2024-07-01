@@ -119,3 +119,38 @@ Todo-list api
 ![image](https://github.com/seungheyon/todo-api/assets/71931476/24226d5f-16a5-4f7f-a2fb-852626e79e47)
 
   ###### 도메인 엔티티 내에서 검증 로직을 가지고, 엔티티의 프로퍼티를 변경하는 행위와 그에 대한 검증도 엔티티에 종속되도록 설계했습니다.
+
+
+
+
+7.01 수정사항
+-------------
+
+### QeuryDsl 사용하여 동적 조건으로 검색하는 기능 구현
+*  QueryDslConfig 클래스에서 JPAQueryFactory 빈 등록
+
+@Configuration
+class QueryDslConfig {
+    @PersistenceContext
+    private lateinit var entityManager: EntityManager
+
+    @Bean
+    fun jpaQueryFactory(): JPAQueryFactory {
+        return JPAQueryFactory(entityManager)
+    }
+}
+
+* TaskQueyrDslRepository 를 작성하여, TaskRepository 가 이를 확장하도록 구현
+@Repository
+interface TaskRepository : JpaRepository<Task, Long>, TaskQueryDslRepository {
+    fun findAllByOrderByCreatedAtDesc(): List<Task>
+    fun findAllByUserNameOrderByCreatedAtDesc(authorName: String) : List<Task>
+}
+
+interface TaskQueryDslRepository {
+    fun search(searchCondition: SearchCondition): List<Task>
+}
+
+* 구현클래스에서 BooleanExpression 을 활용하여 동적 조건을 처리하도록 구현
+
+  
