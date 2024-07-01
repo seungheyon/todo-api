@@ -22,7 +22,6 @@ import java.util.Date
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 class Task(
     var taskTitle: String,
